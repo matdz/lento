@@ -19,7 +19,7 @@
 
       <div class="row">
         <div class="three columns">
-          <a class="title" href="/">len.to</a>
+          <a class="title" href="/">Matteo takes Photos</a>
         </div>
       </div>
 
@@ -40,6 +40,17 @@
                   {{- if ne $key 0 }}, {{ end }}<a class="tag" href='/tags/{{ $tag | urlize }}'>{{ $tag | lower }}</a>
                 {{ end }}
               {{ end }}
+          </div>
+          <div class="row post-tags">
+              {{ if .Params.model }}<span>📷 {{ .Params.make }} {{ .Params.model }}</span>{{ end }}
+              {{ if .Params.focal_length }}<span>🔭 {{ .Params.focal_length }}</span>{{ end }}
+              {{ if .Params.exposure_time }}<span>⏱ {{ .Params.exposure_time }}</span>{{ end }}
+              {{ if .Params.f_number }}<span>𝑓 {{ .Params.f_number }}</span>{{ end }}
+              {{ if .Params.iso }}<span>ISO {{ .Params.iso }}</span>{{ end }}
+              {{ if .Params.gps_latitude }}<span>{{ .Params.gps_latitude }}</span>{{ end }}
+              {{ if .Params.gps_longitude }}<span>{{ .Params.gps_longitude }}</span>{{ end }}
+
+
           </div>
 
         </div>

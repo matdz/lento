@@ -2,8 +2,17 @@
 # Use of this source code is governed by a GPL style
 # license that can be found in the LICENSE file.
 # Build stage
-FROM debian:buster-slim as build
+#FROM debian:buster-slim as build
+FROM debian:bookworm-slim as build
+
 ARG HUGO_VERSION=0.79.1
+
+# scrivi: docker build -t lento .
+# docker run -p 8080:80 lento
+
+# apri PowerShell e scrivi: cd C:\Users\matte\Downloads\githubpages\lento
+#  hugo server
+
 
 RUN apt-get update \
   && apt-get install -y curl
