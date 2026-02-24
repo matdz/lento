@@ -56,3 +56,8 @@ hugo
 (genera la cartella public/)
 
 Copia tutto il contenuto della cartella public e pubblicalo su github pages
+
+
+git add .
+git commit -m "descrizione delle modifiche"
+git push

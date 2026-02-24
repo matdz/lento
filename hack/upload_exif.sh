@@ -17,6 +17,22 @@ if ! [[ -x "$(command -v exiftool)" ]] ; then
   exit 1
 fi
 
+# Funzione per convertire "5 deg 53' 34.29" S" in decimale
+convert_gps() {
+  local raw="$1"
+  echo "$raw" | awk '{
+    deg = $1
+    min = $3
+    sec = $4
+    dir = $5
+    gsub(/'"'"'/, "", min)
+    gsub(/"/, "", sec)
+    decimal = deg + min/60 + sec/3600
+    if (dir == "S" || dir == "W") decimal = -decimal
+    printf "%.6f", decimal
+  }'
+}
+
 folder=$1
 
 for filepath in "$folder"/*.{jpg,jpeg,JPG,JPEG,heic,HEIC}; do
@@ -45,17 +61,18 @@ for filepath in "$folder"/*.{jpg,jpeg,JPG,JPEG,heic,HEIC}; do
   gps_lat=$(exiftool -GPSLatitude -s3 "$filepath")
   gps_lon=$(exiftool -GPSLongitude -s3 "$filepath")
 
+  # Converti in decimale
+  gps_lat_dec=$(convert_gps "$gps_lat")
+  gps_lon_dec=$(convert_gps "$gps_lon")
+
   # Salva i dati EXIF in un file di testo
   exif_file="./content/img/${id}_exif.txt"
   exiftool -Make -Model -ExposureTime -FNumber -ISO -CreateDate -ApertureValue -FocalLength -GPSAltitude -GPSLatitude -GPSLongitude "$filepath" > "${exif_file}"
-
-  
 
   static_folder="/c/Users/matte/Downloads/githubpages/lento/static"
   cp "$filepath" "${static_folder}/${new_filename}"
   echo "Copiato ${filename} -> ${static_folder}/${new_filename}"
 
-  
   # Crea il file .md
   img="./content/img/${id}.md"
   echo "---" > "${img}"
@@ -71,7 +88,8 @@ for filepath in "$folder"/*.{jpg,jpeg,JPG,JPEG,heic,HEIC}; do
   echo "gps_altitude: ${gps_alt}" >> "${img}"
   echo "gps_latitude: ${gps_lat}" >> "${img}"
   echo "gps_longitude: ${gps_lon}" >> "${img}"
-  #echo "img_url: ${url}" >> "${img}"
+  echo "gps_latitude_dec: ${gps_lat_dec}" >> "${img}"
+  echo "gps_longitude_dec: ${gps_lon_dec}" >> "${img}"
   echo "img_url: /${new_filename}" >> "${img}"
   echo "original_fn: ${filename}" >> "${img}"
   echo "tags:" >> "${img}"
@@ -84,4 +102,4 @@ done
 
 echo "Done!"
 
-  # bash hack/upload_exif.sh /c/Users/matte/Downloads/githubpages/lento/upload_immagini
+# bash hack/upload_exif.sh /c/Users/matte/Downloads/githubpages/lento/upload_immagini

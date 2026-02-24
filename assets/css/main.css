@@ -181,9 +181,11 @@ ul.tag-posts > li.long {
   column-count: 1;
   column-gap: 10px;
 }
-.gallery > img {
+.gallery img {
   width: 100% !important;
-  height: auto !important;
+  max-height: 400px !important;
+  object-fit: cover;
+  object-position: center center;
 }
 
 #rotate {
@@ -249,4 +251,5 @@ ul.pagination li {
   .archive .row {
     padding: 1em;
   }
+
 }

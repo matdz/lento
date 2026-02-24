@@ -1,8 +1,4 @@
-<!--
-# Copyright 2022 Ben Woodward. All rights reserved.
-# Use of this source code is governed by a GPL style
-# license that can be found in the LICENSE file.
--->
+
 <title>Matteo takes Photos</title>
 
 <meta charset="UTF-8">
@@ -17,3 +13,6 @@
 {{ $style := resources.Get "css/main.css" }}
 {{ $css := slice $skeleton $style | resources.Concat "css/bundle.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js"></script>
