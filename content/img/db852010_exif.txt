@@ -1,0 +1,11 @@
+Make                            : Apple
+Camera Model Name               : iPhone 13
+Exposure Time                   : 1/1186
+F Number                        : 1.6
+ISO                             : 50
+Create Date                     : 2023:03:19 18:14:42
+Aperture Value                  : 1.6
+Focal Length                    : 5.1 mm
+GPS Altitude                    : 71.3 m Above Sea Level
+GPS Latitude                    : 38 deg 40' 46.52" N
+GPS Longitude                   : 9 deg 10' 21.38" W
